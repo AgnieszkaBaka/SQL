@@ -1,0 +1,55 @@
+# Procedura, twórząc tabelę Film_czekający_na_ocenę i Oceny tworze procedurę, która usuwa film, który czeka na ocenę ze względu na swoją ocenę
+
+
+CREATE TABLE Film_czekający_na_ocenę (
+  id_Film_czekający_na_ocenę  INT PRIMARY KEY,
+  nazwa VARCHAR(50)
+);
+INSERT INTO Film_czekający_na_ocenę (id_Film_czekający_na_ocenę , nazwa) VALUES (1, 'Wielka Szóstka')
+INSERT INTO Film_czekający_na_ocenę (id_Film_czekający_na_ocenę , nazwa) VALUES (2, 'Iron man')
+INSERT INTO Film_czekający_na_ocenę (id_Film_czekający_na_ocenę , nazwa) VALUES (3, 'Matrix')
+INSERT INTO Film_czekający_na_ocenę (id_Film_czekający_na_ocenę , nazwa) VALUES (4, 'Patrol')
+
+
+
+CREATE TABLE Oceny (
+  id_Oceny INT PRIMARY KEY,
+  id_Film_czekający_na_ocenę  INT,
+  ocena INT,
+);
+
+INSERT INTO Oceny (id_Oceny, id_Film_czekający_na_ocenę , ocena) VALUES (1, 1, 4), (2, 2, 3), (3, 3, 5), (4, 4, 2);
+
+CREATE PROCEDURE usuń_konkretny_film
+@id_Film_czekający_na_ocenę  INT
+AS
+BEGIN
+
+DELETE FROM Oceny
+WHERE id_Film_czekający_na_ocenę  = @id_Film_czekający_na_ocenę ;
+
+DELETE FROM Film_czekający_na_ocenę 
+WHERE id_Film_czekający_na_ocenę  = @id_Film_czekający_na_ocenę ;
+END;
+
+EXEC usuń_konkretny_film @id_Film_czekający_na_ocenę  = 3;
+SELECT * FROM Oceny 
+
+
+
+
+#Procedura, która wyszuka po podaniu pierwszej literki filmu zagranego przez Aktora, poda jego imię 
+
+CREATE PROCEDURE PobierzAktoraNaPodstawieLitery (@PierwszaLitera CHAR)
+AS
+BEGIN
+    SELECT Imię, Filmografia
+    FROM Aktorzy
+    WHERE Imię LIKE @PierwszaLitera + '%';
+END
+
+EXEC PobierzAktoraNaPodstawieLitery 'A';
+
+
+
+

@@ -1,0 +1,8 @@
+#Widok, który łączy tabelę Film z tabelą Plan_filmowy aby pokazać dokładne informacje w temacie filmu
+
+CREATE VIEW Dane_filmowe AS
+SELECT Film.id_Film, Film.tytuł, Film.data_produkcji, Film.data_premiery, Film.czas_trwania, Film.gatunek, Film.miejsce_produkcji, Film.liczba_miejsc,Plan_filmowy.id_plan_filmowy, Plan_filmowy.miejsce, Plan_filmowy.liczba_miejscówek, Plan_filmowy.nazwa AS nazwa_studia
+FROM Film 
+JOIN Plan_filmowy ON Film.id_Plan_filmowy = Plan_filmowy.id_Plan_filmowy;
+
+SELECT * FROM Dane_filmowe;

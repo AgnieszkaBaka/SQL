@@ -1,0 +1,19 @@
+# Wyzwalacz, który wraz ze zmianą liczby_miejsc gdzie film może zostać nakręcony (tabela Film) i przy utowrzeniu nowej tabeli nowe_miejsca usunie liczbę miejsc do nakręcenia filmu
+Dotyczy całej tabeli Film
+
+CREATE TABLE nowe_miejsca (ilość_nowych_miejsc INT, liczba_osób_na_planie INT);
+INSERT INTO nowe_miejsca (ilość_nowych_miejsc, liczba_osób_na_planie)
+SELECT  (SELECT COUNT (*) FROM Film), (SELECT COUNT (*) FROM Film)
+SELECT * From nowe_miejsca
+
+CREATE TRIGGER dodaj_nowe_miejsca
+on Film 
+AFTER DELETE
+AS 
+BEGIN
+UPDATE nowe_miejsca
+SET ilość_nowych_miejsc =(SELECT COUNT(*) FROM Film);
+END;
+
+DELETE FROM Film WHERE id_Film = 5;
+SELECT * FROM nowe_miejsca

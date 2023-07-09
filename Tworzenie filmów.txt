@@ -1,0 +1,330 @@
+SET DATEFORMAT ymd;
+    Create table  Plan_filmowy (
+	id_Plan_filmowy  int IDENTITY (1,1) 	PRIMARY KEY,
+    miejsce varchar (50) DEFAULT 'kraj',
+      liczba_miejscówek int NOT NULL, 
+     nazwa varchar (50) DEFAULT 'nazwa studia'
+      
+  
+      );
+      
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 5, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 10, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 8, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 9, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 12, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 7, 'Sony Pictures Motion Picture Group')
+INSERT INTO Plan_filmowy (miejsce, liczba_miejscówek , nazwa) VALUES ('USA', 5, 'Sony Pictures Motion Picture Group')
+
+
+CREATE TABLE Film (
+  id_Film int 	PRIMARY KEY,
+  tytuł varchar (50) NOT NULL ,
+  data_produkcji date NOT NULL,
+  data_premiery date  NOT NULL, 
+  czas_trwania int NOT NULL, 
+  gatunek varchar (50) NOT NULL, 
+  miejsce_produkcji varchar (50) NOT NULL,
+  liczba_miejsc int NOT NULL, 
+  id_Plan_filmowy int,
+  
+  CHECK  (czas_trwania >60)
+  
+  );
+  
+INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy ) values (1,'Forrest Gump','1994-06-23','1999-06-03',  140, 'dramat', 'USA',5,1)
+ INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (2, 'Iluzja','1994-06-23','2009-01-21',  140, 'Komedia', 'USA',10,2)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (3,'Batman','1987-06-23','1992-08-18',  140, 'Kryminalny', 'USA',20,3)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (4,'Zielona Mila','1994-06-23','2005-06-09',  140, 'Przygodowy', 'USA',5,4)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (5,'Życie jest piękne','1994-06-23', '2010-05-11',  140, 'dramat', 'USA',4,5)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (6,'Siedem','1994-06-23', '1999-10-23', 140, 'Przygodowy', 'USA',8,6)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (7,'Spiderman','1994-06-23','1998-06-20', 140, 'Thriller', 'USA',5,7)
+  INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (8,'Joker','2000-07-07', '2010-07-07', 140, 'Thriller', 'USA',33,8)
+    INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (9,'Trauma','2006-12-30', '2007-12-30', 140, 'Kryminalny', 'USA',33,9)
+      INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (10,'Winni','2000-03-15', '2011-03-15', 140, 'Kryminalny', 'USA',33,10)
+        INSERT INTO Film (id_Film,tytuł, data_produkcji, data_premiery, czas_trwania, gatunek, miejsce_produkcji,liczba_miejsc,  id_Plan_filmowy) values (11,'Diabeł wcielony','2010-08-23', '2011-03-15', 140, 'Thriller', 'USA',33,11)
+  
+
+   
+   
+ 
+    create table Reżyser (
+    id_Reżyser  int IDENTITY (1,1) 	PRIMARY KEY,
+    imię  varchar (30) NOT NULL UNIQUE,
+    nazwisko  varchar (30) NOT NULL UNIQUE,
+    pochodzenie  varchar (30) NOT NULL UNIQUE,
+    data_urodzenia date NOT NULL UNIQUE,
+    doświadczenie  varchar (50) DEFAULT 'nagroda', 
+   
+      
+      );
+    
+    INSERT INTO Reżyser (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ( 'Robert', 'Zemeckis', 'USA', '1951-05-14', 'Oscar')
+    
+  
+  
+   
+    Create table Muzyka (
+    id_Muzyka  int IDENTITY (1,1) 	PRIMARY KEY,
+    rodzaj  varchar (50) NOT NULL,  
+      tytuł varchar (50) NOT NULL,  
+    czas_trwania int NOT NULL,
+    id_Film  int FOREIGN KEY REFERENCES Film (id_Film),
+
+    
+     CHECK (czas_trwania > 1),
+    
+    );
+    
+INSERT INTO Muzyka (rodzaj,tytuł, czas_trwania) VALUES ('klasyczna', 'Gladiator', 2)
+INSERT INTO Muzyka (rodzaj,tytuł, czas_trwania) VALUES ('klasyczna', 'We rock', 5)
+INSERT INTO Muzyka (rodzaj,tytuł, czas_trwania) VALUES ('klasyczna', 'Skrzydełka', 10)
+INSERT INTO Muzyka (rodzaj,tytuł, czas_trwania) VALUES ('klasyczna', 'Time of Our Lives', 8)
+INSERT INTO Muzyka (rodzaj,tytuł, czas_trwania) VALUES ('klasyczna', 'Vivir la Vida', 15)
+
+  
+
+     create table Twórcy (
+    id_Twórcy  int IDENTITY (1,1) 	PRIMARY KEY,
+    imię  varchar (30) NOT NULL UNIQUE, 
+    nazwisko  varchar (30) NOT NULL UNIQUE,
+    doświadczenie  varchar (50) DEFAULT 'nagroda' , 
+    id_Muzyka int FOREIGN KEY REFERENCES Muzyka (id_Muzyka),
+    
+      
+     );
+     
+INSERT INTO Twórcy (imię, nazwisko, doświadczenie) values ('Alan ', 'Silvestri', ' Grammy')
+
+  
+
+    
+    
+ 
+    CREATE TABLE Reżyserzy (
+    id_Reżyserzy  int IDENTITY (1,1) 	PRIMARY KEY,
+    imię varchar (30) NOT NULL,
+    nazwisko varchar (30) NOT NULL,
+    pochodzenie varchar (50) NOT NULL,
+    data_urodzenia date NOT NULL,
+    doświadczenie varchar (50) DEFAULT 'nagroda', 
+    id_Film int FOREIGN KEY REFERENCES Film (id_Film),
+    id_Reżyser int  FOREIGN KEY REFERENCES Reżyser (id_Reżyser),
+   
+    CHECK (len(imię) >=2 ),
+    CHECK (len(nazwisko) >=2 ),
+    
+      );
+      
+    INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Stanley', 'Kurbicki', 'USA', '1928-03-07',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Sam', 'Kurbicki', 'USA',  '1955-06-12',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('David', 'Kurbicki', 'USA', '1934-07-01',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Nick', 'Kurbicki', 'USA', '1985-07-06',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Albert', 'Kurbicki', 'USA', '1966-05-01',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Nicolas', 'Kurbicki', 'USA', '1935-12-25',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Erick', 'Kurbicki', 'USA', '1999-04-09',  'BAFTA') 
+INSERT INTO Reżyserzy (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) values ('Owen', 'Kurbicki', 'USA', '1928-03-07',  'BAFTA') 
+
+    
+    CREATE TABLE Wątki_fabularne (
+     id_Wątki_fabularne  int IDENTITY (1,1) 	PRIMARY KEY,
+      rodzaje varchar (30) NOT NULL,
+      id_Fabuła int 
+      
+      
+      
+      );
+      
+      INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('romantyczny')
+          INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('przygodowy')
+  INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('detektywistyczny')
+          INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('morderczy')
+           INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('familijny')
+           INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('przygodowy')
+          INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('zabawny')
+        INSERT INTO Wątki_fabularne (rodzaje) VALUEs ('przygodowy')
+        
+      
+      
+    create table Fabuła (
+    id_Fabuła  int IDENTITY (1,1) 	PRIMARY KEY,
+      opis_wydarzeń varchar (100) NOT NULL,
+      plan_wydarzeń varchar (100) NOT NULL,
+      
+      
+      CHECK (len (opis_wydarzeń)>=1),
+      CHECK (len (plan_wydarzeń) >=1),
+      
+      );
+      
+      INSERT INTO Fabuła (opis_wydarzeń, plan_wydarzeń) VALUES ('historia', 'opis przebiegu filmu')
+    
+    CREATE table Aktor (
+    id_Aktor  int IDENTITY (1,1) 	PRIMARY KEY,
+      imię varchar (30) NOT NULL UNIQUE,
+      nazwisko varchar (30) NOT NULL UNIQUE,
+      pochodzenie varchar (30) NOT NULL UNIQUE,
+      płeć varchar (10) NOT NULL,
+      data_urodzenia date NOT NULL unique,
+      nagrody varchar (50) NOT NULL unique,
+      filmografia varchar (50) DEFAULT 'najlepszy film z jego/jej udziałem', 
+      rola varchar (50) NOT NULL,
+     
+      );
+      
+      INSERT INTO Aktor (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values  ('Tom', 'Hanks', 'USA', 'męzczyzna', '1956-07-09', 'Oscar', 'Zielona Mila','pierwszoplanowa')
+    
+    
+    CREATE table Aktorzy (
+    id_Aktorzy  int IDENTITY (1,1) 	PRIMARY KEY,
+       imię varchar (30) NOT NULL,
+      nazwisko varchar (30) NOT NULL,
+      pochodzenie varchar (30) NOT NULL,
+      płeć varchar (10) NOT NULL,
+      data_urodzenia date NOT NULL,
+      nagrody varchar (50) NOT NULL,
+      filmografia varchar (50) DEFAULT 'najlepszy film z jego/jej udziałem', 
+      rola varchar (50) NOT NULL,
+      id_Film int FOREIGN KEY REFERENCES Film (id_Film),
+      id_Aktor int FOREIGN KEY REFERENCES Aktor (id_AKtor),
+      
+      CHECK (len (imię) >=2 ),
+      CHECK (len (nazwisko) >=2 ),
+      
+      );
+      
+      INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values ('Gary','Sinise','USA', 'męzczyzna', '1985-04-20',  ' Złoty Glob', 'Forrest Gump','pierwszoplanowa')
+      INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values  ('Adam', 'Sandler', 'USA', 'męzczyzna', '1962-01-19', 'Złota Malina', 'Spadaj tato','drugoplanowa')
+    INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values  ('Jennifer', 'Aniston', 'USA',  'kobieta', '1955-04-12', 'Emmy', 'Spadaj tato','antagonisty ')
+        INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values ('Angelina', 'Jolie', 'USA',  'kobieta', '1999-12-12', 'Oscar', 'Czarownica','pierwszoplanowa')
+            INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values ('Angelina', 'Jolie', 'USA',  'kobieta', '1974-04-13', 'Saturn', 'Pan i Pani Smith','epizodyczna') 
+    INSERT INTO Aktorzy (imię, nazwisko, pochodzenie, płeć, data_urodzenia, nagrody, filmografia,rola) values  ('Jennifer', 'Aniston', 'USA',  'kobieta', '1965-05-12', 'People choice', 'Sztuka zrywania','pierwszoplanowa')
+    
+    
+        Create table Kaskader (
+    id_Kaskader  int IDENTITY (1,1) 	PRIMARY KEY,
+      imię varchar (30) NOT NULL UNIQUE,
+      nazwisko varchar (30) NOT NULL UNIQUE,
+      pochodzenie varchar (30) NOT NULL UNIQUE,
+      płeć varchar (10) NOT NULL,
+      data_urodzenia date NOT NULL unique,
+      filmografia varchar (50) DEFAULT 'najlepszy film z jego/jej udziałem', 
+    
+
+      );
+      
+      
+      INSERT INTO Kaskader  (imię, nazwisko, pochodzenie, płeć, data_urodzenia, filmografia) values ('Dar', 'Robinson', 'USA', 'męzczyzna', '1947-03-10', 'Motyl')
+    
+    
+    
+    
+    
+   
+    
+    create table Rola (
+    id_Rola  int IDENTITY (1,1) 	PRIMARY KEY,
+    znaczenie varchar (30) NOT NULL, 
+      id_Aktorzy int FOREIGN KEY REFERENCES Aktorzy (id_Aktorzy),
+      id_Kaskader int FOREIGN KEY REFERENCES Kaskader (id_Kaskader)
+      
+      
+
+      
+      );
+      
+      INSERT INTO Rola (znaczenie) VALUES ('pierwszoplanowa')
+            INSERT INTO Rola (znaczenie) VALUES ('drugoplanowa')
+INSERT INTO Rola (znaczenie) VALUES ('komediowa ')     
+ INSERT INTO Rola (znaczenie) VALUES ('antagonisty ')     
+ INSERT INTO Rola (znaczenie) VALUES (' drugiego planu')     
+ INSERT INTO Rola (znaczenie) VALUES ('epizodyczna')     
+  INSERT INTO Rola (znaczenie) VALUES ('pierwszoplanowa')
+      
+
+    
+   create table Fotograf (
+    id_Fotograf  int IDENTITY (1,1) 	PRIMARY KEY,
+ 	 imię varchar (30) NOT NULL UNIQUE,
+     nazwisko varchar (30) NOT NULL UNIQUE,
+      pochodzenie varchar (30) NOT NULL UNIQUE,
+      data_urodzenia date  NOT NULL UNIQUE,
+      historia_zatrudnienia varchar (50) NOT NULL UNIQUE,
+      działalność varchar (50) DEFAULT 'miejsce pracy',
+      
+      
+      CHECK (len (historia_zatrudnienia) >=1),
+           
+      );
+      
+      
+      INSERT INTO Fotograf (imię, nazwisko, pochodzenie, data_urodzenia, historia_zatrudnienia,działalność) VALUEs ('Anton', 'Corbijn', 'Holandia','1955-05-20', 'filmy', 'Holandia')
+  
+  
+  
+  
+  
+
+    
+    create table Zdjęcia (
+    id_Zdjęcia  int IDENTITY (1,1) 	PRIMARY KEY,
+    ilość varchar (10) NOT NULL,
+    sceny_z_filmu varchar (30) NOT NULL,
+    id_Film int  FOREIGN KEY REFERENCES Film (id_Film),
+    id_Fotograf int FOREIGN KEY REFERENCES Fotograf (id_Fotograf),
+      
+      
+      
+	  CHECK (ilość>=1),
+      CHECK (len (sceny_z_filmu)>=1),
+ 
+
+      );
+      
+      
+INSERT INTO Zdjęcia (ilość, sceny_z_filmu) VALUES (10, 'wojenne')
+    
+
+    
+ 
+  
+  
+  
+    create table Montażysta (
+    id_Montażysta  int IDENTITY (1,1) 	PRIMARY KEY,
+       imię varchar (30) NOT NULL,
+      nazwisko varchar (30) NOT NULL ,
+      pochodzenie varchar (30) NOT NULL ,
+      pracownik varchar (30) NOT NULL,
+      data_urodzenia date NOT NULL ,
+      doświadczenie  varchar (50) DEFAULT 'nagroda',
+      
+      
+    );
+    
+    INSERT INTO Montażysta (imię, nazwisko, pochodzenie,pracownik, data_urodzenia, doświadczenie) VALUES ('Arthur', 'Schmidt', 'USA','pracuje', '1937-06-12', ' Oscar')
+      INSERT INTO Montażysta (imię, nazwisko, pochodzenie,pracownik, data_urodzenia, doświadczenie) VALUES ('Akira ', 'Kurosawa', 'USA','pracuje', '1937-06-12', ' Oscar')
+INSERT INTO Montażysta (imię, nazwisko, pochodzenie,pracownik, data_urodzenia, doświadczenie) VALUES ('Casey ', 'Affleck', 'USA','pracuje', '1937-06-12', ' Oscar')
+      INSERT INTO Montażysta (imię, nazwisko, pochodzenie,pracownik, data_urodzenia, doświadczenie) VALUES ('Ed  ', 'Wood', 'USA','pracuje', '1937-06-12', ' Oscar')
+     INSERT INTO Montażysta (imię, nazwisko, pochodzenie,pracownik, data_urodzenia, doświadczenie) VALUES ('James ', 'Franco', 'USA','pracuje', '1937-06-12', ' Oscar')
+            
+                            
+                            
+    Create table Montażyści (
+    id_Monatżyści  int IDENTITY (1,1) 	PRIMARY KEY,
+       imię varchar (30) NOT NULL,
+      nazwisko varchar (30) NOT NULL,
+      pochodzenie varchar (30) NOT NULL,
+      data_urodzenia date NOT NULL, 
+      doświadczenie varchar (50) DEFAULT 'nagroda',
+      id_Film int FOREIGN KEY REFERENCES Film (id_Film),
+      id_Montażysta int FOREIGN KEY REFERENCES Montażysta (id_Montażysta),
+     
+      
+      CHECK (len (imię)  >=1),
+      CHECK (len (nazwisko) >=1)
+      
+      );
+      
+      INSERT INTO Montażyści (imię, nazwisko, pochodzenie, data_urodzenia, doświadczenie) VALUES ('Marcia', 'Lucas', 'Australia','1972-04-02', 'BAFTA')
+      

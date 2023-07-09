@@ -1,0 +1,31 @@
+#Funkcja ktora zwraca roznice między trwaniem utworu w jednym i drugimi filmie
+
+CREATE FUNCTION roznica_między_utworami (@film1_tytuł VARCHAR(255), @film2_tytuł VARCHAR(255))
+RETURNS INT
+AS
+BEGIN
+DECLARE @czas_trwania1 INT, @czas_trwania2 INT
+
+SELECT @czas_trwania1 = CAST(czas_trwania AS INT) FROM Muzyka WHERE tytuł = @film1_tytuł
+SELECT @czas_trwania2 = CAST(czas_trwania AS INT) FROM Muzyka WHERE tytuł = @film2_tytuł
+
+RETURN (@czas_trwania1 - @czas_trwania2)
+END
+
+SELECT dbo.roznica_między_utworami( 'Time of our lives', 'Gladiator')
+
+
+
+
+#Funkcja,  która zwraca datę premiery z przesunięciem o określoną ilość dni
+
+CREATE FUNCTION data_z_przesunięciem(@data_filmu DATE, @przesuniecie INT)
+RETURNS DATE
+AS
+BEGIN
+DECLARE @data_premiery DATE;
+SET @data_premiery = DATEADD(DAY, @przesuniecie, @data_filmu);
+RETURN @data_premiery;
+END;
+
+SELECT tytuł, dbo.data_z_przesunięciem(data_premiery, 7) AS data_premiery_przesunieta FROM Film
